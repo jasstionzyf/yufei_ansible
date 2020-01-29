@@ -1,0 +1,15 @@
+---
+- name: test task 1
+  shell: echo {{ as_test  }}
+  #hostvars['gpu0.dev']['vars']['as_log_dirs']
+  tags: comm_test_task1
+  register: comm_test_task1_out
+
+- debug: var=comm_test_task1_out.stdout_lines
+  tags: comm_test_task1
+- name: test task 2
+  command: bash -l -c ifconfig
+  tags: comm_test_task2
+  register: comm_test_task2_out
+- debug: var=comm_test_task2_out.stdout_lines
+  tags: comm_test_task2

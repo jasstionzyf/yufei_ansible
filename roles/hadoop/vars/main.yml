@@ -1,0 +1,17 @@
+---
+hadoop_version: hadoop-3.2.1
+remote_hadoop_dir: /data/
+hadoop_home: "{{remote_hadoop_dir}}{{hadoop_version}}/"
+
+hadoop_libary_dir: /Volumes/v1/data/software/hadoop/
+
+
+
+
+
+
+
+
+
+
+

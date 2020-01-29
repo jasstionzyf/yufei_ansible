@@ -1,0 +1,17 @@
+---
+- hosts: all
+  gather_facts: true
+  roles:
+    - role: comm
+      vars:
+      tags: comm
+    - role: hadoop
+      vars:
+      tags: hadoop
+
+
+
+
+
+
+

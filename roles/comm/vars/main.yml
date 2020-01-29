@@ -1,0 +1,17 @@
+---
+java_home: /usr/local/jdk
+
+
+
+comm_user: zhaoyufei
+
+as_test: "{{java_home}}{{comm_user}}"
+
+
+
+
+
+
+
+
+
