@@ -1,11 +1,22 @@
 # yufei_ansible
 
+ansible based on functions to admin big data and ai stack
 
-hadoop operations:
-ansible-playbook -i hosts.yml main.yml  -u zhaoyufei -t hadoop  --limit hadoop_slave --list-tags  
-将显示所有的可支持的hadoop相关操作，    
-比如：hadoop, hadoop_config, hadoop_restart_datanode, hadoop_restart_namenode, hadoop_restart_nodemanager, hadoop_restart_resourcemanager, hadoop_setup    
-执行某项操作：  
-ansible-playbook -i hosts.yml main.yml  -u zhaoyufei -t hadoop_config  --limit hadoop_slave
+support frameworks:
+- [x] hadoop
+- [ ] kafka
+- [ ] spark
+
+
+
+### hadoop
+```
+ANSIBLE_ENABLE_TASK_DEBUGGER=True ansible-playbook -i hosts.yml main.yml  -u zhaoyufei -t hadoop_restart_datanode --limit hadoop_slave
+support tags: hadoop_config, hadoop_restart_datanode, hadoop_restart_namenode, hadoop_restart_nodemanager, hadoop_restart_resourcemanager, hadoop_setup
+
+```
+
+       
+
 
 
