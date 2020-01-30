@@ -23,6 +23,11 @@
 </property>
 <property>
       <name>dfs.permissions</name>
-      <value>false</value>
+      <value>true</value>
+   </property>
+    <property>
+      <name>dfs.permissions.enabled</name>
+      <value>true</value>
    </property>
 </configuration>
+

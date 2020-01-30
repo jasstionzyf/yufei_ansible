@@ -2,7 +2,7 @@
 # hadoop operations
 - name: restart datanode
   shell:  bash -l -c 'hdfs --daemon stop datanode';bash -l -c 'hdfs --daemon start datanode'
-  when: as_hadoop_slave
+#  when: as_hadoop_slave
   tags: hadoop_restart_datanode
   async: 30
   poll: 2

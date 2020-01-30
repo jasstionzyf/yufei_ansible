@@ -34,12 +34,6 @@
       <value>{{as_hdfs_name_dir}} </value>
    </property>
 <property>
-      <name>dfs.permissions</name>
-      <value>false</value>
-   </property>
-
-
-<property>
   <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
   <value>false</value>
 </property>
