@@ -10,6 +10,15 @@ as_test: "{{java_home}}{{comm_user}}"
 
 
 
+users:
+  - username: test3
+    use_sudo: no
+    groups: hadoop
+
+#  - username: test2
+#    use_sudo: no
+#    groups: hadoop
+
 
 
 

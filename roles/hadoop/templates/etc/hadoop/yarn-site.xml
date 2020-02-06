@@ -13,6 +13,12 @@
   limitations under the License. See accompanying LICENSE file.
 -->
 <configuration>
+
+    <property>
+		    <name>yarn.resourcemanager.hostname</name>
+		        <value>primary.dev.vcg.com</value>
+			  </property>
+
 	<property>
 		    <name>yarn.webapp.ui2.enable</name>
 		        <value>true</value>
@@ -41,9 +47,7 @@
 </property>
 
 
- <!-- nodemanager related -->
 
-    {%if as_hadoop_slave %}
 
     <property>
     <name>yarn.nodemanager.linux-container-executor.resources-handler.class</name>
@@ -276,8 +280,16 @@
 
 
 
+      <property>
+    <name>yarn.scheduler.maximum-allocation-mb</name>
+    <value>12000</value>
 
-{% endif %}
+
+  </property>
+
+    <!--{%if as_hadoop_slave %}-->
+
+<!--{% endif %}-->
 
 
 </configuration>

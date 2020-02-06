@@ -1,15 +1,102 @@
 ---
-- name: test task 1
-  shell: echo {{ as_test  }}
-  #hostvars['gpu0.dev']['vars']['as_log_dirs']
-  tags: comm_test_task1
-  register: comm_test_task1_out
+#- name: test task 1
+#  shell: echo {{ as_test  }}
+#  #hostvars['gpu0.dev']['vars']['as_log_dirs']
+#  tags: comm_test_task1
+#  register: comm_test_task1_out
+#
+#- debug: var=comm_test_task1_out.stdout_lines
+#  tags: comm_test_task1
+#- name: test task 2
+#  command: bash -l -c ifconfig
+#  tags: comm_test_task2
+#  register: comm_test_task2_out
+#- debug: var=comm_test_task2_out.stdout_lines
+#  tags: comm_test_task2
 
-- debug: var=comm_test_task1_out.stdout_lines
-  tags: comm_test_task1
-- name: test task 2
-  command: bash -l -c ifconfig
-  tags: comm_test_task2
-  register: comm_test_task2_out
-- debug: var=comm_test_task2_out.stdout_lines
-  tags: comm_test_task2
+#- name: set privilidge for imageAI project at remote machine
+#  file:
+#    path: /data/scripts/
+#    owner: zhaoyufei
+#    group: hadoop
+#    mode: u=rwx,g=rx,o=rx
+#    recurse: yes
+#    state: directory
+#  tags: imageAI_deploy
+#  become: yes
+#  become_user: root
+
+
+#- name: Include vars of users.yml to users
+#  include_vars:
+#    file: vars/users.yml
+#    name: users
+
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+  become: yes
+  become_user: root
+
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+  become: yes
+  become_user: root
+
+- name: Add users | create users, shell, home dirs
+  user:
+      name: "{{ item.username }}"
+      shell: /bin/bash
+      create_home: yes
+      comment: create with ansible
+      groups: "{{ item.groups }}"
+  with_items: "{{users}}"
+  tags: user_create
+  become: yes
+  become_user: root
+
+
+
+
+
+
+
+- name: deploy imageAI project to server
+  synchronize:
+    src: /Volumes/v2/projects/my_work/imageAI
+    dest: /data/scripts/
+    rsync_opts:
+      - "--no-motd"
+      - "--exclude=.git"
+  tags: imageAI_deploy
+
+
+- name: upload file to remote machine
+  synchronize:
+    src: /Volumes/v2/vcgImageAI/vcgImageAI.zip
+    dest: /home/zhaoyufei/vcgImageAI.zip
+  tags: local_to_hdfs
+
+- name: upload remote file to hdfs
+  command: bash -l -c 'hadoop fs -put -f /home/zhaoyufei/vcgImageAI.zip /data/stuff/'
+  register: hdfs_out
+
+  tags: local_to_hdfs
+
+- debug: var=hdfs_out.stdout_lines
+  tags: local_to_hdfs
+
+
+
+
+
+
+
+
