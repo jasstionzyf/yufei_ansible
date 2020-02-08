@@ -286,6 +286,15 @@
 
 
   </property>
+     <property>
+    <name>yarn.scheduler.maximum-allocation-vcores</name>
+    <value>32</value>
+
+
+  </property>
+
+
+
 
     <!--{%if as_hadoop_slave %}-->
 

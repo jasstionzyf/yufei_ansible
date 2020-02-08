@@ -10,6 +10,12 @@
     - role: hadoop
       vars:
       tags: hadoop
+    - role: kafka
+      vars:
+      tags: kafka
+    - role: zk
+      vars:
+      tags: zk
 
 
 

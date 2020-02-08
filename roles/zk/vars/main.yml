@@ -1,0 +1,23 @@
+---
+zk_host: 172.16.241.100:2181
+zk_data_dir: /data5/zk_data/
+zk_version: zookeeper-3.4.13
+
+remote_zk_dir: /data/apps/
+zk_home:  "{{remote_zk_dir}}{{zk_version}}/"
+
+zk_libary_dir: /Volumes/v1/data/software/zk/{{zk_version}}.tar.gz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
