@@ -4,8 +4,9 @@ ansible based on functions to admin big data and ai stack
 
 support frameworks:
 - [x] hadoop
-- [ ] kafka
-- [ ] spark
+- [x] kafka
+- [x] zk
+- [x] redis (https://github.com/geerlingguy/ansible-role-redis)
 
 
 

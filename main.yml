@@ -16,6 +16,10 @@
     - role: zk
       vars:
       tags: zk
+    - role: redis
+      become: yes
+      vars:
+      tags: redis
 
 
 
