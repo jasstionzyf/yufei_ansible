@@ -47,16 +47,7 @@
 
 
 
-- name: container-executor.cfg config
-  template:
-    src: templates/etc/hadoop/container-executor.cfg
-    dest: "{{hadoop_home}}etc/hadoop/container-executor.cfg"
-    owner: root
-    group: hadoop
-    mode: u=-,g=rx,o=-
-  become: yes
-  become_user: root
-  tags: hadoop_config
+
 - name: hadoop set up
   become: yes
   become_user: root
@@ -102,5 +93,14 @@
     state: directory
 
 
-
+- name: container-executor.cfg config
+  template:
+    src: templates/etc/hadoop/container-executor.cfg
+    dest: "{{hadoop_home}}etc/hadoop/container-executor.cfg"
+    owner: root
+    group: hadoop
+    mode: u=-,g=rx,o=-
+  become: yes
+  become_user: root
+  tags: hadoop_config
 
