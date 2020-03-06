@@ -98,5 +98,22 @@
 
 
 
+- name: host file update - Local DNS setup across all the servers
+  tags: update_hosts
+  become: yes
+  become_user: root
+  lineinfile:
+    path: /etc/hosts
+    line: "{{item.ip}} \t {{item.domain}}"
+    create: yes
+  with_items: "{{domains}}"
+
+
+
+
+
+
+
+
 
 
