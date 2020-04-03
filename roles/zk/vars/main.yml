@@ -1,6 +1,6 @@
 ---
-zk_host: 172.16.241.100:2181
-zk_data_dir: /data5/zk_data/
+zk_host: "{{as_resourcemanager_address}}:2181"
+zk_data_dir: "{{as_zk_data_dir}}"
 zk_version: zookeeper-3.4.13
 
 remote_zk_dir: /data/apps/

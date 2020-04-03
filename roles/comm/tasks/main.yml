@@ -98,7 +98,7 @@
 
 
 
-- name: host file update - Local DNS setup across all the servers
+- name: host file update - Local DNS setup across all the servers also need to remove old domain
   tags: update_hosts
   become: yes
   become_user: root

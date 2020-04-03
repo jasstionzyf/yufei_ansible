@@ -25,6 +25,7 @@
     mode: u=rwx,g=xr,o=x
   tags: zk_setup
 
+
 - name: zk change foler permission
   become: yes
   become_user: root
