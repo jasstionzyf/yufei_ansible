@@ -30,14 +30,25 @@
     <name>yarn.nodemanager.resource-plugins.gpu.docker-plugin</name>
     <value>nvidia-docker-v2</value>
   </property>
-     <property>
-    <name>yarn.nodemanager.resource-plugins.gpu.path-to-discovery-executables</name>
-    <value>nvidia-smi</value>
-</property>
+
      <property>
     <name>yarn.nodemanager.resource-plugins</name>
     <value>yarn.io/gpu</value>
   </property>
+
+     <property>
+    <name>yarn.nodemanager.resource-plugins.gpu.allowed-gpu-devices</name>
+    <value>0:1</value>
+  </property>
+    <property>
+    <name>yarn.nodemanager.resource-plugins.gpu.path-to-discovery-executables</name>
+    <value>/etc/alternatives/x86_64-linux-gnu_nvidia_smi</value>
+  </property>
+
+
+
+
+
 
 {% endif %}
 
@@ -55,10 +66,16 @@
   </property>
 
 
- <property>
-    <name>yarn.nodemanager.linux-container-executor.cgroups.mount</name>
-    <value>false</value>
-</property>
+ <!--<property>-->
+    <!--<name>yarn.nodemanager.linux-container-executor.cgroups.mount</name>-->
+    <!--<value>true</value>-->
+<!--</property>-->
+
+     <!--<property>-->
+    <!--<name>yarn.nodemanager.linux-container-executor.cgroups.mount-path</name>-->
+    <!--<value>/sys/fs/cgroup/</value>-->
+<!--</property>-->
+
 
 <property>
         <name>yarn.nodemanager.local-dirs</name>

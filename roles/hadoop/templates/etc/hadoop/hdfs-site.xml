@@ -23,12 +23,12 @@
 <configuration>
 
 
-    {% if as_hadoop_master %}
+
     <property>
       <name>dfs.replication</name>
       <value>1</value>
    </property>
-
+ {% if as_hadoop_master %}
    <property>
       <name>dfs.name.dir</name>
       <value>{{as_hdfs_name_dir}} </value>
