@@ -1,4 +1,7 @@
 Host *
+        PubkeyAuthentication yes
+        PasswordAuthentication no
+        ChallengeResponseAuthentication no
         GSSAPIAuthentication yes
         StrictHostKeyChecking no
 # If this option is set to yes then remote X11 clients will have full access

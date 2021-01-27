@@ -9,6 +9,10 @@ hadoop_libary_path: /Volumes/v1/data/software/hadoop/{{hadoop_version}}.tar.gz
 
 hadoop_home: "{{remote_hadoop_dir}}{{hadoop_version}}/"
 hbase_home: "{{remote_hadoop_dir}}{{hbase_version}}/"
+spark_version: spark-3.0.0-preview2-bin-hadoop3.2
+spark_home: "{{remote_hadoop_dir}}{{spark_version}}/"
+
+
 
 
 

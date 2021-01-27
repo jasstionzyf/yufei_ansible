@@ -1,7 +1,7 @@
 ---
 java_home: /usr/local/jdk
 
-
+comm_libarys_path: /Volumes/v1/data/software/
 
 comm_user: zhaoyufei
 
@@ -12,8 +12,12 @@ as_test: "{{java_home}}{{comm_user}}"
 
 users:
   - username: test3
-    use_sudo: no
-    groups: hadoop
+    use_sudo: yes
+    groups: sudo
+  - username: zhaoyufei
+    use_sudo: yes
+    groups: sudo
+
 
 #  - username: test2
 #    use_sudo: no
@@ -30,6 +34,19 @@ domains:
     domain: gpu0.dev.vcg.com
   - ip: 172.16.237.152
     domain: gpu1.dev.vcg.com
+
+vbs_domains:
+  - ip: 192.168.3.31
+    domain: vb1.dev.yufei.com
+  - ip: 192.168.3.30
+    domain: vb0.dev.yufei.com
+
+
+
+
+
+
+
 
 
 
