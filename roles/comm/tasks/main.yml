@@ -49,10 +49,18 @@
     validate: 'visudo -cf %s'
   become: yes
   become_user: root
+- name: add groups
+  group:
+    name: "{{item.groups}}"
+    state: present
+  with_items: "{{users}}"
+  tags: user_create
+  become: yes
+  become_user: root
 
 - name: Add users | create users, shell, home dirs
   user:
-      name: "{{ item.username }}"
+      name: "{{item.username}}"
       shell: /bin/bash
       create_home: yes
       comment: create with ansible
@@ -161,18 +169,19 @@
   become_user: root
   tags: ssh_setup
   template:
-    dest: /etc/ssh/ssh_config
-    src: templates/ssh_config
+    dest: /etc/ssh/sshd_config
+    src: templates/sshd_config
     mode: u=rw,g=r,o=r
     owner: root
     group: root
-#  notify:
-#    - restart_ssh
-#  handlers:
-#    - name: restart_ssh
-#      service:
-#        name: sshd
-#        state: restarted
+
+- name: restart_ssh
+  become: yes
+  become_user: root
+  tags: ssh_setup
+  service:
+    name: sshd
+    state: restarted
 - name: copy private key
   tags: ssh_setup
   become: yes

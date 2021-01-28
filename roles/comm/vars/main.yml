@@ -11,12 +11,12 @@ as_test: "{{java_home}}{{comm_user}}"
 
 
 users:
-  - username: test3
+  - username: hadoop
     use_sudo: yes
-    groups: sudo
-  - username: zhaoyufei
-    use_sudo: yes
-    groups: sudo
+    groups: hadoop
+#  - username: zhaoyufei
+#    use_sudo: yes
+#    groups: sudo
 
 
 #  - username: test2
