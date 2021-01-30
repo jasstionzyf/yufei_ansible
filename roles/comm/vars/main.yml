@@ -1,5 +1,7 @@
 ---
-java_home: /usr/local/jdk
+java_version: jdk1.8.0_71
+java_home_prefix: /usr/local/jdk/
+java_home: "{{java_home_prefix}}{{java_version}}"
 
 comm_libarys_path: /Volumes/v1/data/software/
 
@@ -11,12 +13,12 @@ as_test: "{{java_home}}{{comm_user}}"
 
 
 users:
-  - username: hadoop
-    use_sudo: yes
-    groups: hadoop
-#  - username: zhaoyufei
+#  - username: hadoop
 #    use_sudo: yes
-#    groups: sudo
+#    groups: hadoop
+  - username: zhaoyufei
+    use_sudo: yes
+    groups: sudo
 
 
 #  - username: test2
@@ -45,6 +47,10 @@ vbs_domains:
 
 
 
+
+
+
+miniconda_version: 4.7.12
 
 
 
