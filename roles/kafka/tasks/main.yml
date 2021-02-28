@@ -2,19 +2,19 @@
 # kafka operations
 
 
-#- name: start kafka
-#  shell:  bash -l -c ' nohup {{kafka_home}}bin/kafka-server-start.sh {{kafka_home}}/config/server.properties &'
-##  when: as_hadoop_slave
-#  tags: kafka_start
-#  async: 30
-#  poll: 2
-#
-#- name: restart kafka
-#  shell:  bash -l -c '{{kafka_home}}bin/kafka-server-stop.sh {{kafka_home}}/config/server.properties' ; bash -l -c 'nohup {{kafka_home}}bin/kafka-server-start.sh {{kafka_home}}/config/server.properties &'
-##  when: as_hadoop_slave
-#  tags: kafka_restart
-#  async: 30
-#  poll: 2
+- name: start kafka
+  shell:  bash -l -c ' nohup {{app_rootDir}}{{appName}}/bin/kafka-server-start.sh {{app_confRootDir}}{{appName}}/server.properties &'
+#  when: as_hadoop_slave
+  tags: kafka_start
+  async: 30
+  poll: 2
+
+- name: restart kafka
+  shell:  bash -l -c '{{app_rootDir}}{{appName}}/bin/kafka-server-stop.sh {{app_confRootDir}}{{appName}}/server.properties' ; bash -l -c 'nohup {{app_rootDir}}{{appName}}/bin/kafka-server-start.sh {{app_confRootDir}}{{appName}}/server.properties &'
+#  when: as_hadoop_slave
+  tags: kafka_restart
+  async: 30
+  poll: 2
 
 #- name: start
 #  -
@@ -31,28 +31,28 @@
 #
 #  debug:
 #    msg: "{{check_java}}"
-- name: if not install jdk, will exit
-  tags: kafka_install
-  block:
-    - debug:
-        msg: please install jdk before kafka, will exit!
-    - meta: end_play
-  when: check_java.rc > 0
+#- name: if not install jdk, will exit
+#  tags: kafka_install
+#  block:
+#    - debug:
+#        msg: please install jdk before kafka, will exit!
+#    - meta: end_play
+#  when: check_java.rc > 0
 
 
 
 
 
 
-- name: jdk check block
-  tags: kafka_install
-  block:
-    - name:
-      debug:
-        msg: please install jdk before kafka
-    - name:
-      meta: end_play
-  when: check_java.rc > 0
+#- name: jdk check block
+#  tags: kafka_install
+#  block:
+#    - name:
+#      debug:
+#        msg: please install jdk before kafka
+#    - name:
+#      meta: end_play
+#  when: check_java.rc > 0
 
 
 
@@ -71,9 +71,9 @@
     recurse: yes
     state: directory
   loop:
-    - "{{kafka_logRootDir}}{{appName}}/"
-    - "{{kafka_dataRootDir}}{{appName}}/"
-    - "{{kafka_confRootDir}}{{appName}}/"
+    - "{{app_logRootDir}}{{appName}}/"
+    - "{{app_dataRootDir}}{{appName}}/"
+    - "{{app_confRootDir}}{{appName}}/"
     - "{{app_rootDir}}{{appName}}/"
 
 
@@ -95,7 +95,7 @@
   tags: kafka_install
   copy:
     src: templates/config/
-    dest: "{{kafka_confRootDir}}{{appName}}"
+    dest: "{{app_confRootDir}}{{appName}}"
     owner: zhaoyufei
     group: hadoop
     mode: u=rwx,g=xr,o=x
@@ -107,7 +107,7 @@
 
 - name: kafka config files
   template:
-    dest: "{{kafka_confRootDir}}{{appName}}/{{item.dest}}"
+    dest: "{{app_confRootDir}}{{appName}}/{{item.dest}}"
     src: templates/config/{{item.src}}
     mode: u=rw,g=r,o=r
     owner: zhaoyufei

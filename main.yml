@@ -20,8 +20,6 @@
       become: yes
       vars:
       tags: redis
-    - role: maven
-      tags: maven
 
 
 

@@ -3,7 +3,7 @@ java_version: jdk1.8.0_71
 java_home_prefix: /usr/local/jdk/
 java_home: "{{java_home_prefix}}{{java_version}}"
 
-comm_libarys_path: /Volumes/v1/data/software/
+comm_libarys_path:  /mnt/d/data/software/
 
 comm_user: zhaoyufei
 
@@ -16,9 +16,9 @@ users:
   - username: hadoop
     use_sudo: yes
     groups: hadoop
-#  - username: zhaoyufei
-#    use_sudo: yes
-#    groups: sudo
+  - username: zhaoyufei
+    use_sudo: yes
+    groups: sudo
 
 
 #  - username: test2

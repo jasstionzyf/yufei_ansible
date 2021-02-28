@@ -31,6 +31,28 @@
 #  include_vars:
 #    file: vars/users.yml
 #    name: users
+- name: force kill a process given a identify
+  become: yes
+  become_user: root
+  tags: pkill
+  shell: ps -ef|grep {{pid}}|grep -v grep|awk {'print $2'}|xargs  sudo kill -9
+- name: Test hosts list
+  tags: get_ip
+  debug:
+    msg: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+
+- name: ubuntu change ip to static
+  become: yes
+  become_user: root
+  tags: static_ip
+  template:
+    dest: "{{netplan_cfg}}"
+    src: netcfg.yml
+    mode: u=rw,g=r,o=r
+    owner: root
+    group: root
+
+
 
 - name: Make sure we have a 'wheel' group
   group:
@@ -66,7 +88,7 @@
       comment: create with ansible
       groups: "{{ item.groups }}"
   with_items: "{{users}}"
-  tags: user_create
+  tags: user_create,ssh_setup
   become: yes
   become_user: root
 
@@ -83,7 +105,7 @@
 
 - name: deploy imageAI project to server
   synchronize:
-    src: /Volumes/v2/data/projects/my_work/imageAI
+    src: /mnt/c/data/projects/imageAI
     dest: /data/projects/tf2/
     rsync_opts:
       - "--no-motd"
@@ -101,7 +123,7 @@
 
 - name: deploy imageAI project to server
   synchronize:
-    src: /Volumes/v2/data/projects/my_work/imageAI
+    src: /mnt/c/data/projects/imageAI
     dest: /data/projects/
     rsync_opts:
       - "--no-motd"
@@ -170,7 +192,7 @@
   tags: ssh_setup
   template:
     dest: /etc/ssh/sshd_config
-    src: templates/sshd_config
+    src: sshd_config
     mode: u=rw,g=r,o=r
     owner: root
     group: root
