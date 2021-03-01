@@ -20,6 +20,10 @@
       become: yes
       vars:
       tags: redis
+    - role: docker
+      become: yes
+      vars:
+      tags: docker
 
 
 

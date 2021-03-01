@@ -2,10 +2,11 @@
 zk_host: "{{as_hostname}}:2181"
 
 
-zk_libary_dir: /mnt/d/data/software/zk/{{zk_version}}.tar.gz
 appName: zookeeper-3.4.13
+zk_libary_dir: /mnt/d/data/software/zk/{{appName}}.tar.gz
 
-zk_home:  "{{app_rootDir}}{{appName}}"
+
+zk_home:  "{{app_rootDir}}{{appName}}/"
 
 
 

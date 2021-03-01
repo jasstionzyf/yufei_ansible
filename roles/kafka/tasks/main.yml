@@ -85,7 +85,7 @@
     src: "{{kafka_libary_dir}}"
     dest: "{{app_rootDir}}{{appName}}/"
     extra_opts: [--strip-components=1]
-    creates: "{{app_rootDir}}{{appName}}/"
+#    creates: "{{app_rootDir}}{{appName}}/"
     owner: zhaoyufei
     group: hadoop
     mode: u=rwx,g=xr,o=x

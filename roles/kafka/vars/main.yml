@@ -15,7 +15,7 @@ kafka_libary_dir: /mnt/d/data/software/kafka/{{kafka_version}}.tgz
 
 
 appName: kafka_2.12-2.4.0
-zk_host: 172.16.241.100:2181
+zk_host: vb0.dev.yufei.com:2181
 
 
 
