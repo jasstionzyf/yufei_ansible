@@ -379,10 +379,7 @@
 
 
 
-     <property>
-    <name>yarn.timeline-service.enabled</name>
-    <value>false</value>
-    </property>
+
 
     <property>
   <name>yarn.timeline-service.version</name>

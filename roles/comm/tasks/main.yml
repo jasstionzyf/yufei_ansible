@@ -349,3 +349,11 @@
     recurse: yes
 
 
+
+- name: Install specified python requirements within a conda env
+  become: yes
+  become_user: root
+  tags: pip_packages_install
+  pip:
+    requirements: templates/pip_requirements/{{pip_requirements_name}}.txt
+    executable: "{{pip_path}}"
