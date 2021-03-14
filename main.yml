@@ -24,6 +24,17 @@
       become: yes
       vars:
       tags: docker
+    - role: conda
+      become: yes
+      vars:
+      tags: conda
+    - role: es
+      become: yes
+      vars:
+      tags: es
+#    - role: davidwittman.redis
+#      become: yes
+#      tags: redis
 
 
 

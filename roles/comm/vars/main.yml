@@ -48,9 +48,19 @@ vbs_domains:
 
 
 
+test:
+  cluster:
+    initial_master_nodes:
+      - 127.0.0.1
+      - 145.o.o.3
+  es_config:
+    node.name: node1
+    cluster.name: custom-cluster
+    cluster.discovery_seed_hosts:
+      - 127.0.0.1
+      - 128.0.0.1
 
 
-miniconda_version: 4.7.12
 
 
 

@@ -31,6 +31,18 @@
 #  include_vars:
 #    file: vars/users.yml
 #    name: users
+
+
+#- name: Show the uptime in a certain format
+#  tags: test
+#  ansible.builtin.debug:
+#   msg: "{{test['es_config']['discovery_seed_hosts']|array_to_str}}"
+
+- name: show templating results
+  tags: test
+  debug:
+    msg: "{{ lookup('template', './templates/test.j2') }}"
+
 - name: force kill a process given a identify
   become: yes
   become_user: root
@@ -282,13 +294,6 @@
     mode: u=rwx,g=rx,o=rx
     recurse: yes
 
-
-
-#    creates: java_home
-
-
-
-
 - name: set up jdk
   become: yes
   become_user: root
@@ -299,61 +304,38 @@
     mode: u=rw,g=r,o=r
     owner: root
     group: root
-
-
-
-
-
-
-
-
-- name: Download Miniconda
-  tags: conda_install
-  get_url:
-    url: https://repo.continuum.io/miniconda/Miniconda3-{{miniconda_version}}-Linux-x86_64.sh
-    dest: /tmp/install-miniconda.sh
-    mode: 0550
-- name: Create conda folder
+- name: init disk to a filesystem
   become: yes
   become_user: root
-  tags: conda_install
+  tags: disk_mount
+  community.general.filesystem:
+    fstype: ext4
+    dev: /dev/sdb
+#    opts: -cc
+- name: make sure mount path exist
+  become: yes
+  become_user: root
+  tags: disk_mount
   file:
-    path: /opt/miniconda3
+    path: /data/
     state: directory
-    owner: root
-    group: root
+    owner: zhaoyufei
+    group: hadoop
     recurse: yes
-- name: Run the installer
+- name: Mount File System
   become: yes
   become_user: root
-  tags: conda_install
-  shell: /tmp/install-miniconda.sh -b -u -p /opt/miniconda3
-- name: Remove the installer
-  tags: conda_install
-  file:
-    state: absent
-    path: /tmp/install-miniconda.sh
-- name: Add miniconda bin to path
-  become: yes
-  become_user: root
-  tags: conda_install
-  shell: echo 'export PATH=/opt/miniconda3/bin:$PATH' >> /etc/profile
-
-- name: conda - execution permission for all
-  become: yes
-  become_user: root
-  tags: conda_install
-  file:
-    path: /opt/miniconda3/bin
-    mode: u=rwx,g=rx,o=rx
-    recurse: yes
+  tags: disk_mount
+  mount:
+    path: /data/
+    src: /dev/sdb
+    fstype: ext4
+    state: mounted
 
 
 
-- name: Install specified python requirements within a conda env
-  become: yes
-  become_user: root
-  tags: pip_packages_install
-  pip:
-    requirements: templates/pip_requirements/{{pip_requirements_name}}.txt
-    executable: "{{pip_path}}"
+
+
+
+
+
