@@ -32,6 +32,10 @@
       become: yes
       vars:
       tags: es
+    - role: mongo
+      become: yes
+      vars:
+      tags: es
 #    - role: davidwittman.redis
 #      become: yes
 #      tags: redis

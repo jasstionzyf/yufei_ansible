@@ -40,6 +40,8 @@ domains:
 vbs_domains:
   - ip: 192.168.3.22
     domain: vb1.dev.yufei.com
+  - ip: 192.168.3.23
+    domain: vb2.dev.yufei.com
   - ip: 192.168.3.21
     domain: vb0.dev.yufei.com
 

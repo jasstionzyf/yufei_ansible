@@ -1,4 +1,26 @@
 ---
+
+- name: empty es data, log
+  become: yes
+  become_user: root
+  tags: es_clean
+  shell:  bash -l -c ' nohup rm -rf {{app_dataRootDir}}{{appName}}/* &'
+- name: empty es data, log
+  become: yes
+  become_user: root
+  tags: es_clean
+  shell:  bash -l -c ' nohup rm -rf {{app_logRootDir}}{{appName}}/* &'
+
+
+- name: start app
+  become: yes
+  become_user: zhaoyufei
+
+  shell:  bash -l -c ' nohup {{app_rootDir}}{{appName}}/bin/elasticsearch &'
+#  when: as_hadoop_slave
+  tags: es_start
+  async: 30
+  poll: 2
 - name: make sure all related folders present, if present do nothing
   become: yes
   become_user: root

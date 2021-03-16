@@ -73,7 +73,12 @@
   become: yes
   become_user: root
 
-
+- name: Set a hostname
+  become: yes
+  become_user: root
+  tags: setHostName
+  ansible.builtin.hostname:
+    name: "{{as_hostname}}"
 - name: Allow 'wheel' group to have passwordless sudo
   lineinfile:
     dest: /etc/sudoers
